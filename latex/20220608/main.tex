@@ -81,7 +81,11 @@
 \begin{columns}
     \begin{column}{0.47\textwidth}
         \begin{itemize}
-            \item 2020年，2022年に行った講義資料がネットでバズり，2021年9月にマイナビ出版さんから出版されました．
+            \item 2020年，2021年に行った講義資料がネットでバズり
+            (\href{https://b.hatena.ne.jp/entry?url=https\%3A\%2F\%2Ftomomano.github.io\%2Flearn-aws-by-coding\%2F&utm_campaign=bookmark_share&utm_content=tomomano.github.io&utm_medium=social&utm_source=twitter}{1},
+            \href{https://twitter.com/developer_quant/status/1465670426676269059?s=20&t=cGWrhgS02UFtiwa_BH95UQ}{2},
+            \href{https://twitter.com/shion_honda/status/1281572631544655872?s=20}{3})，
+            2021年9月にマイナビ出版さんから出版されました．
             \item 講義資料は引き続きウェブで無料公開しています．
         \end{itemize}
     \end{column}
@@ -98,12 +102,54 @@
 \begin{frame}{講義の予定}
     \begin{itemize}
         \item 第一回 (6/08): イントロダクション・セットアップ
-        \item 第二回 (6/15): EC2 入門
-        \item 第三回 (6/22): クラウドを使った深層学習入門
+        \item 第二回 (6/15): EC2 入門・クラウドを使った深層学習 (1)
+        \item 第三回 (6/22): クラウドを使った深層学習 (2)， Docker 入門
     \end{itemize}
 \end{frame}
 
-\begin{frame}{環境のセットアップ (1)}
+\begin{frame}{計算機環境}
+
+\begin{itemize}
+    \item 本講義では，実際にプログラムを書き，実行することでクラウドの概念・技術を学んでいく．
+    \item Mac/Linux ユーザーは OS に標準搭載のシェルを使用すればよい．
+Windows ユーザーは，\href{https://docs.microsoft.com/en-us/windows/wsl/install}{WSL} により仮想 Linux 環境を構築することを推奨する．
+    \item 演習1 にて各種環境のセットアップを行う．
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{講義用AWSアカウント}
+
+\begin{itemize}
+    \item 登録されている受講者のメールアドレスに， AWS Organization への招待を送りました．
+    \item この招待によってアカウントを作成すると，アカウントは本講義専用の "Organization" に所属します．
+    \teim Organization に所属することで，AWSの利用コストはOrganizationに請求されます．
+    \item 招待が届いたら，メールの中のリンクをクリックし，遷移する先の画面のIDに自分のメールアドレスを入力し，"パスワードのリセット"をクリックし，自身のパスワードを設定してください．
+    \item 講義よりも前に自身のメールアドレスがAWSのアカウントに登録されている場合は，講師まで連絡してください．
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{講義専用アカウントの注意点}
+
+\begin{itemize}
+    \item このアカウントおよびOrganizationは講義の期間中のみ有効です．
+    \item この講義のために \$500 のクレジットが付与されています．
+    この \$500 を受講者全員で共有している状態です．
+    (ないとは思いますが) 大量の計算を走らせるとこのクレジットが枯渇してしまいますので，講義のハンズオン以外の目的には使用しないようにしてください．
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{演習1: AWSアカウントの準備}
+\begin{itemize}
+    \item 前スライドを参照し，自身の AWS アカウントを準備せよ．招待メールを使用することで， Organization に所属するアカウントを作成する点に注意．
+    \item アカウントができたら，AWS コンソールにログインせよ．
+    \item \href{https://tomomano.github.io/learn-aws-by-coding/#aws_secrets}{講義資料15.2章}を参照し，自身の Access key ID, Secret access key を作成せよ．これらは演習2で使用するので，保存しておくこと．なお，アクセスキーは絶対に漏洩してはならない．
+\end{itemize}
+\end{frame}
+
+\begin{frame}{演習2: 環境のセットアップ}
 
 \href{https://tomomano.github.io/learn-aws-by-coding/#sec:appendix_settingup}{講義資料 "15. Appendix: 環境構築"} を参照のうえ，自身の計算機で
 以下の環境を構築せよ．
@@ -112,7 +158,8 @@
     \item Python のインストール
     \item Node.js のインストール
     \item AWS CLI のインストール
-    \item AWS CDK のインストール
+    \item AWS CDK のインストール (version 1.100 を使用してください)
+    \item Access key ID, Secret access key の設定 (\href{https://tomomano.github.io/learn-aws-by-coding/#aws_secrets}{講義資料15.3章}参照)
 \end{itemize}
 
 Mac/Linux ユーザーは OS に標準搭載のシェルを使用すればよい．
@@ -120,64 +167,12 @@ Windows ユーザーは， \href{https://docs.microsoft.com/en-us/windows/wsl/in
 
 \end{frame}
 
-\begin{frame}[fragile]
-\frametitle{環境のセットアップ (1) -- 確認}
-
-前スライドでの準備が正しく完了しているか，以下のコマンドをシェルで実行せよ．
-ソフトのバージョンが表示されればOK．
-
-\rule{\textwidth}{1pt}
-
-\begin{semiverbatim}
-python --version
-node --version
-aws --version
-cdk --version
-\end{semiverbatim}
-
-\rule{\textwidth}{1pt}
-
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{講義専用アカウントの使い方 (1)}
+\begin{frame}{演習3: AWS CLI チュートリアル}
 
 \begin{itemize}
-    \item 真野から各学生のメールアドレスにログイン情報を記述したテキストファイル (JSON ファイル) が送信されます．
-    \item 適当なテキストエディターでこれを開くと以下のような内容が書いてあるはずです．
-    \begin{semiverbatim}
-    \{
-        "UserName": "student-XXX",
-        "Password": "ABCDEF",
-        "AccessKeyId": "XXXXXXXXX",
-        "SecretAccessKey": "YYYYYYYY",
-        "Sign in link": "https://ZZZZZZZ"
-    \}
-    \end{semiverbatim}
-    \item このログイン情報は決して漏洩することのないよう注意して管理すること．
+    \item \href{https://tomomano.github.io/learn-aws-by-coding/\#\_aws\%E3\%81\%A7\%E3\%81\%AE\%E3\%82\%AF\%E3\%83\%A9\%E3\%82\%A6\%E3\%83\%89\%E9\%96\%8B\%E7\%99\%BA}{講義資料3.4.3 "ミニ・ハンズオン: AWS CLI を使ってみよう"} を実行せよ．
 \end{itemize}
     
-\end{frame}
-
-\begin{frame}{講義専用アカウントの使い方 (2)}
-
-\begin{itemize}
-    \item AWSコンソールにログインするには， "Sign in link" にアクセスし， "UserName" と "Password" を入力してください．
-    \item AWS CLI / CDK を使うには，"AccessKeyId", "SecretAccessKey" を使用してください．
-\end{itemize}
-    
-\end{frame}
-
-\begin{frame}{講義専用アカウントの注意点}
-
-\begin{itemize}
-    \item このアカウントは今日の講義の時間中のみ有効です．
-    講義が終わったあとは，数時間以内に削除されることに注意してください．
-    \item この講義のために \$500 のクレジットが付与されています．
-    この \$500 を受講者全員で共有している状態です．
-    (ないとは思いますが) 大量の計算を走らせるとこのクレジットが枯渇してしまいますので，講義のハンズオン以外の目的には使用しないようにしてください．
-\end{itemize}
-
 \end{frame}
 
 \end{document}
