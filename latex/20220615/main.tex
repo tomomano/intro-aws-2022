@@ -1,0 +1,129 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Welcome to Overleaf --- just edit your LaTeX on the left,
+% and we'll compile it for you on the right. If you open the
+% 'Share' menu, you can invite other users to edit at the same
+% time. See www.overleaf.com/learn for more info. Enjoy!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[unicode,11pt]{beamer}
+\usepackage[whole,autotilde]{bxcjkjatype}
+\usepackage{minted}
+\usetheme{Madrid}
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+
+\title{システム情報工学特論}
+\subtitle{コードで学ぶAWS入門 - 第二回}
+\author{真野智之 (Tomoyuki Mano)}
+\institute[OIST]{Okinawa Institute of Science and Technology (OIST)}
+\date{2022/06/15 @東大工学部}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{講義について (1)}
+\begin{itemize}
+    \item 講義資料は
+    \url{https://tomomano.github.io/learn-aws-by-coding/}\\
+    にあります．
+    \item ハンズオンで使用するソースコードは \url{https://github.com/tomomano/learn-aws-by-coding}\\
+    にあります
+    \item スライドと課題のアナウンスは
+    \url{https://github.com/tomomano/intro-aws-2022}\\
+    にあります
+\end{itemize}
+\end{frame}
+
+\begin{frame}{講義について (2)}
+\begin{itemize}
+    \item 講義の中盤 (40分前後) で一度休憩をとります．
+    この際に質問などにも答えます．
+    \item 講義に関する質問は Zoom のチャットに飛ばして下さい．
+    できるだけすぐにその場で回答します．
+    \item 講義の内容は
+    \url{https://tomomano.github.io/learn-aws-by-coding/}\\
+    に従って行います．
+    講義ではコードのデモなど行いますが，基本的に伝える情報は資料と同じです．
+    余裕のある人は各自のペースでどんどん先に進んでしまって構いません．
+    \item ハンズオンのプログラムでバグなど発見した場合は
+    \href{https://github.com/tomomano/learn-aws-by-coding/issues}{GitHub の Issues}
+    まで報告してもらえると助かります (残念ながら成績には関係ありません)．
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{講義の予定}
+    \begin{itemize}
+        \item 第一回 (6/08): イントロダクション・セットアップ
+        \item 第二回 (6/15): EC2 入門・クラウドを使った深層学習 (1)
+        \item 第三回 (6/22): Docker 入門，クラウドを使った深層学習 (2)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{講義専用アカウントの注意点}
+
+\begin{itemize}
+    \item このアカウントおよびOrganizationは講義の期間中のみ有効です．
+    \item この講義のために \$500 のクレジットが付与されています．
+    この \$500 を受講者全員で共有している状態です．
+    (ないとは思いますが) 大量の計算を走らせるとこのクレジットが枯渇してしまいますので，講義のハンズオン以外の目的には使用しないようにしてください．
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{G インスタンスの上限修正申請}
+
+\begin{itemize}
+    \item 本日の演習では GPU 搭載型の EC2 インスタンス (G インスタンス) を使用します．
+    \item アカウント作成初期時は G インスタンスの使用可能 vCPU の上限は 0 になっています．
+    これは， EC2 コンソールにログインし，左のメニューの "Limits (制限)"をクリックすることで確認できます．
+    その中の "Running On-Demand All G and VT instances" という項目を見つけてください．
+    \item "Running On-Demand All G and VT instances" をクリックした上で，右上の”Request Limit increase (
+    制限緩和のリクエスト)" をクリックします．
+    \item ダイアローグにしたがい，G インスタンスの上限を 4 vCPU にする申請を出します．
+    (4 以上申請することも可能ですが，4 で十分です)
+    \item 申請をすると，大抵の場合30分以内にリクエストの受理の案内がメールで届きます．
+    \item 詳しい手順は
+    \url{https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html}
+    を参照のこと．
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{演習1: EC2 インスタンスの作成}
+
+\begin{itemize}
+    \item \href{https://tomomano.github.io/learn-aws-by-coding/#sec_first_ec2}{講義資料4章 "初めてのEC2インスタンスを起動する"} のチュートリアルを自身の AWS アカウントを使用して実行せよ．
+    \item チュートリアルが完了したら，忘れずに CloudFormation のスタックを削除せよ．削除を忘れると無駄なクラウド利用料金が発生することになる．
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{演習2: EC2 で GPU を利用した計算を実行}
+
+\begin{itemize}
+    \item \href{https://tomomano.github.io/learn-aws-by-coding/#sec_jupyter_and_deep_learning}{講義資料6章 "AWS でディープラーニングを実践"} のチュートリアルを自身の AWS アカウントを使用して実行せよ．
+    \item チュートリアルが完了したら，忘れずに CloudFormation のスタックを削除せよ．削除を忘れると無駄なクラウド利用料金が発生することになる．
+    \item 先のスライドで説明した， G インスタンスの制限緩和がされていないとこのチュートリアルはエラーを出すことに留意せよ．
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{第3回までの準備}
+
+\begin{itemize}
+    \item 第3回の講義が始まる前に
+    \href{https://www.docker.com/}{Docker}
+    を自身の計算機にインストールしてください．
+    \item インストールの方法は
+    \href{https://docs.docker.com/engine/install/}{公式ドキュメンテーション}
+    や
+    \href{https://tomomano.github.io/learn-aws-by-coding/#sec:install_docker}{講義資料15.6章}
+    を参照してください．
+\end{itemize}
+    
+\end{frame}
+
+\end{document}

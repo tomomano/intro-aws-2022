@@ -1,0 +1,76 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Welcome to Overleaf --- just edit your LaTeX on the left,
+% and we'll compile it for you on the right. If you open the
+% 'Share' menu, you can invite other users to edit at the same
+% time. See www.overleaf.com/learn for more info. Enjoy!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[unicode,11pt]{beamer}
+\usepackage[whole,autotilde]{bxcjkjatype}
+\usepackage{minted}
+\usetheme{Madrid}
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+
+\title{システム情報工学特論}
+\subtitle{コードで学ぶAWS入門 - 第三回}
+\author{真野智之 (Tomoyuki Mano)}
+\institute[OIST]{Okinawa Institute of Science and Technology (OIST)}
+\date{2022/06/22 @東大工学部}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{講義について (1)}
+\begin{itemize}
+    \item 講義資料は
+    \url{https://tomomano.github.io/learn-aws-by-coding/}\\
+    にあります．
+    \item ハンズオンで使用するソースコードは \url{https://github.com/tomomano/learn-aws-by-coding}\\
+    にあります
+    \item スライドと課題のアナウンスは
+    \url{https://github.com/tomomano/intro-aws-2022}\\
+    にあります
+\end{itemize}
+\end{frame}
+
+\begin{frame}{講義について (2)}
+\begin{itemize}
+    \item 講義の中盤 (40分前後) で一度休憩をとります．
+    この際に質問などにも答えます．
+    \item 講義に関する質問は Zoom のチャットに飛ばして下さい．
+    できるだけすぐにその場で回答します．
+    \item 講義の内容は
+    \url{https://tomomano.github.io/learn-aws-by-coding/}\\
+    に従って行います．
+    講義ではコードのデモなど行いますが，基本的に伝える情報は資料と同じです．
+    余裕のある人は各自のペースでどんどん先に進んでしまって構いません．
+    \item ハンズオンのプログラムでバグなど発見した場合は
+    \href{https://github.com/tomomano/learn-aws-by-coding/issues}{GitHub の Issues}
+    まで報告してもらえると助かります (残念ながら成績には関係ありません)．
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{講義の予定}
+    \begin{itemize}
+        \item 第一回 (6/08): イントロダクション・セットアップ
+        \item 第二回 (6/15): EC2 入門・クラウドを使った深層学習 (1)
+        \item 第三回 (6/22): Docker 入門，クラウドを使った深層学習 (2)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{講義専用アカウントの注意点}
+
+\begin{itemize}
+    \item このアカウントおよびOrganizationは講義の期間中のみ有効です．
+    \item この講義のために \$500 のクレジットが付与されています．
+    この \$500 を受講者全員で共有している状態です．
+    (ないとは思いますが) 大量の計算を走らせるとこのクレジットが枯渇してしまいますので，講義のハンズオン以外の目的には使用しないようにしてください．
+\end{itemize}
+
+\end{frame}
+
+\end{document}
