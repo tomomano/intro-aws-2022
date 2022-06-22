@@ -15,7 +15,7 @@
 
 \title{システム情報工学特論}
 \subtitle{コードで学ぶAWS入門 - 第三回}
-\author{真野智之 (Tomoyuki Mano)}
+\author[Tomoyuki Mano]{\texorpdfstring{真野智之 (Tomoyuki Mano)\newline\url{tomoyukimano[@]gmail.com}}{Author}}
 \institute[OIST]{Okinawa Institute of Science and Technology (OIST)}
 \date{2022/06/22 @東大工学部}
 
@@ -38,13 +38,12 @@
 
 \begin{frame}{講義について (2)}
 \begin{itemize}
-    \item 講義の中盤 (40分前後) で一度休憩をとります．
-    この際に質問などにも答えます．
+    \item 講義は座学6割・演習4割くらいのイメージで進める予定です．
     \item 講義に関する質問は Zoom のチャットに飛ばして下さい．
     できるだけすぐにその場で回答します．
     \item 講義の内容は
     \url{https://tomomano.github.io/learn-aws-by-coding/}\\
-    に従って行います．
+    に従って行います（8章までの予定)．
     講義ではコードのデモなど行いますが，基本的に伝える情報は資料と同じです．
     余裕のある人は各自のペースでどんどん先に進んでしまって構いません．
     \item ハンズオンのプログラムでバグなど発見した場合は
@@ -69,6 +68,41 @@
     \item この講義のために \$500 のクレジットが付与されています．
     この \$500 を受講者全員で共有している状態です．
     (ないとは思いますが) 大量の計算を走らせるとこのクレジットが枯渇してしまいますので，講義のハンズオン以外の目的には使用しないようにしてください．
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{演習1: Docker入門}
+
+\begin{itemize}
+    \item \href{https://tomomano.github.io/learn-aws-by-coding/\#sec_docker_introduction}{講義資料7章 "Docker 入門"}を読み，以下を自身のコンピュータで実行せよ．
+    \item (1) Docker Hub から \hl{\textbf{ubuntu:18.04}} を pull し，コンテナを起動せよ．
+    \item (2) 講義のチュートリアルを実行するための Docker イメージの Dockerfile が \href{https://github.com/tomomano/learn-aws-by-coding/blob/main/docker/Dockerfile}{GitHub} にある．これを自身のコンピュータ上でビルドせよ．
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{演習2: 自動質問回答ボット}
+
+\begin{itemize}
+    \item \href{https://tomomano.github.io/learn-aws-by-coding/\#sec_fargate_qabot}{講義資料8章 "Hands-on #3: AWS で自動質問回答ボットを走らせる"} のチュートリアルを自身の AWS アカウントを使用して実行せよ．
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{アカウントの終了について}
+
+\begin{itemize}
+    \item 講義用の AWS Organization に紐づいたアカウントはタームの終わりまで有効です（期末課題の提出が終了するまで）．
+    \item タームが終わったら，以下のいずれかの方法でアカウントを AWS Organization から退出してください．
+    管理者権限ではこれらは実行できないため，皆さん自身で行っていただく必要があります．
+    \item (1) アカウントを削除する．
+    シンプルな方法です．
+    なお，この方法を取った場合，同じメールアドレスで再び AWS アカウントを作ることが（基本的に）できなくなります．
+    \item (2) 自身のアカウントにクレジットカード情報を登録する．
+    もし，自身のアカウントを継続して使用したい場合は，この方法を採用してください．
+    支払い方法が未設定のアカウントは，Organization から管理者の権限で外すことができないためです．
+    \item ターム終了後に Organization からの退出が確認できない場合は，個別にメールで連絡します．
 \end{itemize}
 
 \end{frame}
